@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/index.html">
+    <title>پنل ادمین | Adidas Pro Shop</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <style>
+        :root { --black: #000; --red: #e30613; --gray: #f8f8f8; }
+        body { font-family: 'Vazirmatn', sans-serif; background: var(--gray); padding: 2rem; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        h1, h2 { text-align: center; color: var(--black); margin-bottom: 1.5rem; }
+        input, select, button, textarea { width: 100%; padding: 1rem; margin: 0.8rem 0; border: 1px solid #ddd; border-radius: 12px; font-size: 1rem; }
+        button { background: var(--red); color: white; border: none; cursor: pointer; font-weight: bold; }
+        button:hover { background: #c7000f; }
+        .product-item { border: 1px solid #eee; padding: 1rem; margin: 1rem 0; border-radius: 12px; background: #f9f9f9; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+        .product-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; }
+        .delete-btn { background: #e74c3c; padding: 0.5rem 1rem; width: auto; border-radius: 8px; margin: 0.2rem; }
+        .edit-btn { background: #f39c12; padding: 0.5rem 1rem; width: auto; border-radius: 8px; margin: 0.2rem; }
+        .out-of-stock { opacity: 0.6; background: #f0f0f0; }
+        .hidden { display: none; }
+        .back-link { display: block; text-align: center; margin: 1.5rem 0; color: var(--red); text-decoration: none; font-weight: bold; }
+        .form-edit { border: 2px solid var(--red); padding: 1rem; margin: 1rem 0; border-radius: 12px; }
+        .add-btn { background: #27ae60; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>پنل مدیریت محصولات</h1>
+    <a href="index.html" class="back-link">← بازگشت به سایت</a>
+
+    <h2>افزودن/ویرایش محصول</h2>
+    <div id="editForm" class="form-edit hidden">
+        <select id="editCategory">
+            <option value="shoes">کفش</option>
+            <option value="clothing">لباس</option>
+            <option value="hoodie">هودی</option>
+            <option value="pants">شلوار</option>
+            <option value="hats">کلاه</option>
+        </select>
+        <input type="text" id="editTitle" placeholder="نام محصول">
+        <input type="text" id="editPrice" placeholder="قیمت (مثلاً ۲,۸۵۰,۰۰۰)">
+        <input type="file" id="editImage" accept="image/*">
+        <label><input type="checkbox" id="editOutOfStock"> ناموجود</label>
+        <button onclick="saveEdit()">ذخیره تغییرات</button>
+        <button onclick="cancelEdit()" style="background:#95a5a6;">لغو</button>
+    </div>
+
+    <button class="add-btn" onclick="showAddForm()">افزودن محصول جدید</button>
+
+    <h2>محصولات فعلی</h2>
+    <div id="productList"></div>
+</div>
+
+<script>
+    let editingIndex = -1;
+    let editingCat = '';
+    let currentImage = '';
+
+    const categories = ['shoes', 'clothing', 'hoodie', 'pants', 'hats'];
+    const titles = { shoes: 'کفش', clothing: 'لباس', hoodie: 'هودی', pants: 'شلوار', hats: 'کلاه' };
+
+    // آپلود عکس فیکس شده
+    document.getElementById('editImage').addEventListener('change', e => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = ev => currentImage = ev.target.result;
+            reader.readAsDataURL(file);
+        } else {
+            currentImage = '';
+        }
+    });
+
+    function showAddForm() {
+        editingIndex = -1;
+        document.getElementById('editForm').classList.remove('hidden');
+        document.getElementById('editCategory').value = 'shoes';
+        document.getElementById('editTitle').value = '';
+        document.getElementById('editPrice').value = '';
+        document.getElementById('editImage').value = '';
+        document.getElementById('editOutOfStock').checked = false;
+        currentImage = '';
+    }
+
+    function editProduct(cat, index) {
+        editingCat = cat;
+        editingIndex = index;
+        const products = JSON.parse(localStorage.getItem(`adidas_${cat}`)) || [];
+        const p = products[index];
+        document.getElementById('editForm').classList.remove('hidden');
+        document.getElementById('editCategory').value = cat;
+        document.getElementById('editTitle').value = p.title;
+        document.getElementById('editPrice').value = p.price;
+        document.getElementById('editOutOfStock').checked = p.outOfStock || false;
+        currentImage = p.img; // تصویر قبلی رو نگه دار
+    }
+
+    function saveEdit() {
+        const cat = document.getElementById('editCategory').value;
+        const title = document.getElementById('editTitle').value.trim();
+        const price = document.getElementById('editPrice').value.trim();
+        const outOfStock = document.getElementById('editOutOfStock').checked;
+        const img = currentImage || 'https://via.placeholder.com/300?text=No+Image';
+
+        if (!title || !price) return alert('نام و قیمت را وارد کنید!');
+
+        const key = `adidas_${editingIndex === -1 ? cat : editingCat}`;
+        let products = JSON.parse(localStorage.getItem(key)) || [];
+
+        if (editingIndex === -1) {
+            // اضافه جدید
+            products.push({ title, price, img, outOfStock });
+        } else {
+            // ویرایش
+            products[editingIndex] = { title, price, img, outOfStock };
+        }
+
+        localStorage.setItem(key, JSON.stringify(products));
+
+        cancelEdit();
+        loadProducts();
+        alert('ذخیره شد!');
+    }
+
+    function cancelEdit() {
+        document.getElementById('editForm').classList.add('hidden');
+        editingIndex = -1;
+        currentImage = '';
+    }
+
+    function deleteProduct(cat, index) {
+        if (confirm('حذف شود؟')) {
+            const key = `adidas_${cat}`;
+            let products = JSON.parse(localStorage.getItem(key)) || [];
+            products.splice(index, 1);
+            localStorage.setItem(key, JSON.stringify(products));
+            loadProducts();
+        }
+    }
+
+    function toggleOutOfStock(cat, index) {
+        const key = `adidas_${cat}`;
+        let products = JSON.parse(localStorage.getItem(key)) || [];
+        products[index].outOfStock = !products[index].outOfStock;
+        localStorage.setItem(key, JSON.stringify(products));
+        loadProducts();
+    }
+
+    function loadProducts() {
+        const list = document.getElementById('productList');
+        list.innerHTML = '';
+        categories.forEach(cat => {
+            let products = JSON.parse(localStorage.getItem(`adidas_${cat}`)) || [];
+            if (products.length > 0) {
+                list.innerHTML += `<h3 style="margin-top:1.5rem; color:var(--red);">${titles[cat]}</h3>`;
+                products.forEach((p, i) => {
+                    const className = p.outOfStock ? 'out-of-stock' : '';
+                    list.innerHTML += `
+                        <div class="product-item ${className}">
+                            <img src="${p.img}" alt="${p.title}">
+                            <div style="flex:1;">
+                                <strong>${p.title}</strong><br>
+                                <span style="color:var(--red);">${p.price} تومان</span>
+                                ${p.outOfStock ? '<span style="color:#e74c3c;">(ناموجود)</span>' : ''}
+                            </div>
+                            <button class="edit-btn" onclick="editProduct('${cat}', ${i})">ویرایش</button>
+                            <button class="delete-btn" onclick="deleteProduct('${cat}', ${i})">حذف</button>
+                            <button onclick="toggleOutOfStock('${cat}', ${i})" style="background:#27ae60; padding:0.5rem 1rem; width:auto; border-radius:8px; margin:0.2rem;">
+                                ${p.outOfStock ? 'موجود کن' : 'ناموجود کن'}
+                            </button>
+                        </div>`;
+                });
+            }
+        });
+        if (list.innerHTML === '') list.innerHTML = '<p style="text-align:center; color:#999;">محصولی وجود ندارد. از دکمه "افزودن" استفاده کنید.</p>';
+    }
+
+    // لود اولیه
+    loadProducts();
+</script>
+</body>
+</html>
