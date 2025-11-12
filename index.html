@@ -1,296 +1,181 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="index.js" />
-    <link rel="stylesheet" href="index.css" />
-    <link rel="stylesheet" href="admin.html">
-    <link
-      rel="icon"
-      type="image/jpeg"
-      href="https://i.postimg.cc/Gpc2THdy/273467878-1838986359824359-2947925077142838001-n.jpg"
-    />
-    <title>mr_you_botik | بوتیک آقای تو</title>
-  </head>
-  <body>
-   
-</section>
-    <!-- هدر -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MR You Botik | بوتیک مردانه آدیداس</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #000; --secondary: #fff; --accent: #e74c3c; --bg-light: #f8f9fa; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Vazirmatn', sans-serif; color: #333; line-height: 1.6; background: var(--bg-light); }
+        header { background: var(--primary); color: var(--secondary); padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        nav { max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { font-size: 2rem; font-weight: bold; color: var(--accent); }
+        .nav-menu { display: flex; list-style: none; gap: 2rem; }
+        .nav-menu a { color: var(--secondary); text-decoration: none; transition: color 0.3s; }
+        .nav-menu a:hover { color: var(--accent); }
+        .search-cart { display: flex; gap: 1rem; align-items: center; }
+        .search-box { padding: 0.5rem; border: 1px solid #ddd; border-radius: 5px; background: var(--secondary); color: #333; }
+        .cart-icon { font-size: 1.5rem; color: var(--secondary); cursor: pointer; position: relative; }
+        .cart-count { position: absolute; top: -5px; right: -5px; background: var(--accent); color: var(--secondary); border-radius: 50%; width: 20px; height: 20px; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; }
+        .hero { background: url('https://images.unsplash.com/photo-1558618047-3c8c76ca7d36?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center/cover; height: 400px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--secondary); margin-top: 70px; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .container { max-width: 1200px; margin: auto; padding: 2rem; }
+        .section { padding: 2rem 0; }
+        .section-title { text-align: center; font-size: 2rem; margin-bottom: 2rem; color: var(--primary); }
+        .horizontal-slider { position: relative; }
+        .slider { display: flex; gap: 1.5rem; overflow-x: auto; scroll-behavior: smooth; padding: 1rem 0; scrollbar-width: none; }
+        .slider::-webkit-scrollbar { display: none; }
+        .product-card { min-width: 280px; background: var(--secondary); border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s; flex-shrink: 0; }
+        .product-card:hover { transform: translateY(-5px); }
+        .product-card.out-of-stock { opacity: 0.6; }
+        .product-img { width: 100%; height: 200px; object-fit: cover; }
+        .product-info { padding: 1rem; }
+        .product-title { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .product-price { color: var(--accent); font-weight: bold; margin-bottom: 0.5rem; }
+        .add-to-cart { background: var(--accent); color: var(--secondary); border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; width: 100%; }
+        .add-to-cart:hover:not(:disabled) { background: #c0392b; }
+        .add-to-cart:disabled { background: #bdc3c7; cursor: not-allowed; }
+        .scroll-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: var(--primary); color: var(--secondary); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; }
+        .scroll-left { right: 0; }
+        .scroll-right { left: 0; }
+        footer { background: var(--primary); color: var(--secondary); text-align: center; padding: 2rem; }
+        @media (max-width: 768px) { .nav-menu { display: none; } .hero h1 { font-size: 2rem; } .scroll-arrow { display: none; } }
+    </style>
+</head>
+<body>
     <header>
-      <div class="logo_por">
-        <img
-          class="logo-circle"
-          src="https://i.postimg.cc/Gpc2THdy/273467878-1838986359824359-2947925077142838001-n.jpg"
-          alt="Mr You Logo"
-        />
-        <div class="logo">mr_you_botik</div>
-      </div>
-
-      <nav>
-        <a href="#">خانه</a>
-        <a href="#">شگفتانه </a>
-        <a href="#">دسته‌بندی</a>
-        <a href="#">درباره ما</a>
-        <a href="#">سبد خرید</a>
-        
-        
-      </nav>
-      <!-- قطعه کد جستجو (قابل قرارگیری در هدر یا هر جایی) -->
-      <div class="search-container">
-        <button type="submit" onclick="performSearch()">🔍</button>
-        <input
-          type="search"
-          id="searchInput"
-          placeholder="جستجو در محصولات..."
-        />
-      </div>
+        <nav>
+            <div class="logo">MR You Botik</div>
+            <ul class="nav-menu">
+                <li><a href="#home">خانه</a></li>
+                <li><a href="#products">محصولات</a></li>
+            </ul>
+            <div class="search-cart">
+                <input type="text" class="search-box" placeholder="جستجو...">
+                <i class="fas fa-shopping-cart cart-icon" id="cartIcon">
+                    <span class="cart-count" id="cartCount">0</span>
+                </i>
+            </div>
+        </nav>
     </header>
-    <br />
 
-    <!-- بنر با تصویر آپلودشده (وسط‌چین شده) -->
-    <div class="hero-banner"></div>
- 
-    <!-- بخش دسته‌بندی (جایگزین محصولات) -->
-    <section class="categories" id="categories">
-      <h2>دسته‌ بندی ها</h2>
-      <div class="category-grid">
-        <div class="category-card">
-          <img
-            src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=300&h=200&fit=crop"
-            alt="کفش"
-          />
-          <p>کفش</p>
+    <section class="hero" id="home">
+        <div>
+            <h1>به MR You Botik خوش آمدید</h1>
+            <p>بوتیک مردانه با بهترین محصولات آدیداس</p>
         </div>
-        <div class="category-card">
-          <img
-            src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=200&fit=crop"
-            alt="کلاه"
-          />
-          <p>کلاه</p>
-        </div>
-        <div class="category-card">
-          <img
-            src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=300&h=200&fit=crop"
-            alt="تی‌شرت"
-          />
-          <p>تی شرت</p>
-        </div>
-        <div class="category-card">
-          <img
-            src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=200&fit=crop"
-            alt="کفش"
-          />
-          <p>کفش</p>
-        </div>
-        <div class="category-card">
-          <img
-            src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=300&h=200&fit=crop"
-            alt="شلوار"
-          />
-          <p>شلوار</p>
-        </div>
-        <div class="category-card">
-          <img
-            src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=300&h=200&fit=crop"
-            alt="کاپشن"
-          />
-          <p>کاپشن</p>
-        </div>
-      </div>
     </section>
 
-    <!-- //بخش اسلایدر محصولات -->
-    <section class="section" id="shoes">
-    <h2 class="section-title">کفش آدیداس</h2>
-    <div class="horizontal-slider">
-        <div class="scroll-arrow scroll-right" onclick="scrollSlider('shoes-slider', -300)">←</div>
-        <div class="scroll-arrow scroll-left" onclick="scrollSlider('shoes-slider', 300)">→</div>
-        <div class="slider" id="shoes-slider">
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500" alt="استن اسمیت" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-title">استن اسمیت سفید</h3>
-                    <p class="product-price">۲,۸۵۰,۰۰۰ تومان</p>
-                    <button class="add-to-cart">اضافه به سبد</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1605733160314-4fc7dac4bb16?auto=format&fit=crop&w=500" alt="اولترابوست" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-title">اولترابوست ۲۲</h3>
-                    <p class="product-price">۴,۹۰۰,۰۰۰ تومان</p>
-                    
-                    <button class="add-to-cart">اضافه به سبد</button>
-                </div>
-            </div>
-            <!-- کارت‌های بیشتر اضافه کن -->
-        </div>
+    <div class="container">
+        <div id="sections-container"></div>
     </div>
-</section>
 
-<section class="section" id="clothing">
-    <h2 class="section-title">لباس آدیداس</h2>
-    <div class="horizontal-slider">
-        <div class="scroll-arrow scroll-right" onclick="scrollSlider('clothing-slider', -300)">←</div>
-        <div class="scroll-arrow scroll-left" onclick="scrollSlider('clothing-slider', 300)">→</div>
-        <div class="slider" id="clothing-slider">
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=500" alt="تی‌شرت" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-title">تی‌شرت مشکی لوگو</h3>
-                    <p class="product-price">۱,۱۵۰,۰۰۰ تومان</p>
-                    <button class="add-to-cart">اضافه به سبد</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1583744946564-b52ac1cb28ea?auto=format&fit=crop&w=500" alt="پولو" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-title">پولوشرت سفید</h3>
-                    <p class="product-price">۱,۴۰۰,۰۰۰ تومان</p>
-                    <button class="add-to-cart">اضافه به سبد</button>
-                </div>
-            </div>
-            <!-- کارت‌های بیشتر اضافه کن -->
-        </div>
-    </div>
-</section>
-
-<section class="section" id="hoodie">
-    <h2 class="section-title">هودی آدیداس</h2>
-    <div class="horizontal-slider">
-        <div class="scroll-arrow scroll-right" onclick="scrollSlider('hoodie-slider', -300)">←</div>
-        <div class="scroll-arrow scroll-left" onclick="scrollSlider('hoodie-slider', 300)">→</div>
-        <div class="slider" id="hoodie-slider">
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1529139571401-41e5b5fb6b6e?auto=format&fit=crop&w=500" alt="هودی خاکستری" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-title">هودی خاکستری اورجینال</h3>
-                    <p class="product-price">۲,۳۰۰,۰۰۰ تومان</p>
-                    <button class="add-to-cart">اضافه به سبد</button>
-                </div>
-            </div>
-            <!-- کارت‌های بیشتر اضافه کن -->
-        </div>
-    </div>
-</section>
-
-<section class="section" id="pants">
-    <h2 class="section-title">شلوار آدیداس</h2>
-    <div class="horizontal-slider">
-        <div class="scroll-arrow scroll-right" onclick="scrollSlider('pants-slider', -300)">←</div>
-        <div class="scroll-arrow scroll-left" onclick="scrollSlider('pants-slider', 300)">→</div>
-        <div class="slider" id="pants-slider">
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=500" alt="شلوار جین" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-title">شلوار جین بگ</h3>
-                    <p class="product-price">۱,۹۰۰,۰۰۰ تومان</p>
-                    <button class="add-to-cart">اضافه به سبد</button>
-                </div>
-            </div>
-            <!-- کارت‌های بیشتر اضافه کن -->
-        </div>
-    </div>
-</section>
-
-<section class="section" id="hats">
-    <h2 class="section-title">کلاه آدیداس</h2>
-    <div class="horizontal-slider">
-        <div class="scroll-arrow scroll-right" onclick="scrollSlider('hats-slider', -300)">←</div>
-        <div class="scroll-arrow scroll-left" onclick="scrollSlider('hats-slider', 300)">→</div>
-        <div class="slider" id="hats-slider">
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1620238215217-0e1c3e4650b8?auto=format&fit=crop&w=500" alt="کلاه کپ" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-title">کلاه کپ مشکی</h3>
-                    <p class="product-price">۷۵۰,۰۰۰ تومان</p>
-                    <button class="add-to-cart">اضافه به سبد</button>
-                </div>
-            </div>
-            <!-- کارت‌های بیشتر اضافه کن -->
-        </div>
-    </div>
-</section>
-
-    <!-- فوتر -->
     <footer>
-      <p>&copy; ۱۴۰۴ mr_you_botik. تمامی حقوق محفوظ است.</p>
-      <p>طراحی شده با ❤️ برای آقایان شیک‌پوش</p>
+        <p>&copy; ۱۴۰۴ MR You Botik - تمامی حقوق محفوظ است</p>
     </footer>
-  </body>
-  <script>
-    function performSearch() {
-    const query = document.getElementById('searchInput').value;
-    if (query) {
-        // اینجا می‌تونی منطق جستجو رو اضافه کنی (مثل فیلتر محصولات یا redirect به صفحه نتایج)
-        alert('جستجو برای: ' + query); // مثال ساده – جایگزین کن با کد واقعی
-        // مثلاً: window.location.href = '/search?q=' + encodeURIComponent(query);
-    }
-}
-//بخش اسلایدر محصولات
-// اسکرول با فلش
-function scrollSlider(sliderId, amount) {
-    const slider = document.getElementById(sliderId);
-    if (slider) slider.scrollLeft -= amount;
-}
 
-// اسکرول با موس (کشیدن)
-document.addEventListener('mousedown', e => {
-    const slider = e.target.closest('.slider');
-    if (!slider) return;
-    let startX = e.pageX - slider.offsetLeft;
-    let scrollLeft = slider.scrollLeft;
-    let isDown = true;
+    <script>
+        const categories = [
+            { id: 'shoes', title: 'کفش' },
+            { id: 'clothing', title: 'لباس' },
+            { id: 'hoodie', title: 'هودی' },
+            { id: 'pants', title: 'شلوار' },
+            { id: 'hats', title: 'کلاه' }
+        ];
 
-    const move = ev => {
-        if (!isDown) return;
-        ev.preventDefault();
-        const x = ev.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2;
-        slider.scrollLeft = scrollLeft - walk;
-    };
-    const up = () => { 
-        isDown = false; 
-        document.removeEventListener('mousemove', move); 
-        document.removeEventListener('mouseup', up); 
-    };
+        function initDefaultProducts() {
+            let hasData = false;
+            categories.forEach(cat => {
+                if (localStorage.getItem(`mr_you_${cat.id}`)) hasData = true;
+            });
+            if (!hasData) {
+                const defaults = {
+                    shoes: [{title: 'کفش استن اسمیت', price: '2800000', img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500', outOfStock: false}],
+                    clothing: [{title: 'تی‌شرت مشکی', price: '1100000', img: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=500', outOfStock: false}],
+                    hoodie: [{title: 'هودی خاکستری', price: '2200000', img: 'https://images.unsplash.com/photo-1529139571401-41e5b5fb6b6e?auto=format&fit=crop&w=500', outOfStock: false}],
+                    pants: [{title: 'شلوار جین', price: '1900000', img: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=500', outOfStock: false}],
+                    hats: [{title: 'کلاه کپ', price: '800000', img: 'https://images.unsplash.com/photo-1620238215217-0e1c3e4650b8?auto=format&fit=crop&w=500', outOfStock: false}]
+                };
+                categories.forEach(cat => {
+                    localStorage.setItem(`mr_you_${cat.id}`, JSON.stringify(defaults[cat.id]));
+                });
+            }
+        }
 
-    document.addEventListener('mousemove', move);
-    document.addEventListener('mouseup', up);
-});
-// نمایش ناموجود در اسلایدرها
-function loadSections() {
-    const container = document.getElementById('sections-container');
-    container.innerHTML = '';
-    categories.forEach(cat => {
-        const products = JSON.parse(localStorage.getItem(`adidas_${cat.id}`)) || [];
-        if (products.length === 0) return;
+        function loadSections() {
+            const container = document.getElementById('sections-container');
+            container.innerHTML = '';
+            categories.forEach(cat => {
+                let products = JSON.parse(localStorage.getItem(`mr_you_${cat.id}`)) || [];
+                if (products.length === 0) return;
 
-        let html = `
-            <section class="section" id="${cat.id}">
-                <h2 class="section-title">${cat.title} آدیداس</h2>
-                <div class="horizontal-slider">
-                    <div class="scroll-arrow scroll-right" onclick="scrollSlider('${cat.id}-slider', -300)">←</div>
-                    <div class="scroll-arrow scroll-left" onclick="scrollSlider('${cat.id}-slider', 300)">→</div>
-                    <div class="slider" id="${cat.id}-slider">`;
+                let html = `
+                    <section class="section" id="${cat.id}">
+                        <h2 class="section-title">${cat.title} آدیداس</h2>
+                        <div class="horizontal-slider">
+                            <div class="scroll-arrow scroll-right" onclick="scrollSlider('${cat.id}-slider', -300)">←</div>
+                            <div class="scroll-arrow scroll-left" onclick="scrollSlider('${cat.id}-slider', 300)">→</div>
+                            <div class="slider" id="${cat.id}-slider">`;
 
-        products.forEach(p => {
-            const stockText = p.outOfStock ? '<span style="color:#e74c3c;">(ناموجود)</span>' : '';
-            html += `
-                <div class="product-card ${p.outOfStock ? 'out-of-stock' : ''}">
-                    <img src="${p.img}" class="product-img" alt="${p.title}">
-                    <div class="product-info">
-                        <h3 class="product-title">${p.title} ${stockText}</h3>
-                        <p class="product-price">${p.price} تومان</p>
-                        <button class="add-to-cart" ${p.outOfStock ? 'disabled' : ''} onclick="addToCart('${p.title}')">اضافه به سبد</button>
-                    </div>
-                </div>`;
+                products.forEach(p => {
+                    const stockText = p.outOfStock ? '<span style="color:#e74c3c;">(ناموجود)</span>' : '';
+                    const cardClass = p.outOfStock ? 'out-of-stock' : '';
+                    const btnDisabled = p.outOfStock ? 'disabled' : '';
+                    html += `
+                        <div class="product-card ${cardClass}">
+                            <img src="${p.img}" class="product-img" alt="${p.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/200?text=Image'">
+                            <div class="product-info">
+                                <h3 class="product-title">${p.title} ${stockText}</h3>
+                                <p class="product-price">${p.price} تومان</p>
+                                <button class="add-to-cart" ${btnDisabled} onclick="addToCart('${p.title}')">اضافه به سبد</button>
+                            </div>
+                        </div>`;
+                });
+
+                html += '</div></div></section>';
+                container.innerHTML += html;
+            });
+        }
+
+        let cart = JSON.parse(localStorage.getItem('mr_you_cart')) || [];
+        function addToCart(title) {
+            cart.push(title);
+            localStorage.setItem('mr_you_cart', JSON.stringify(cart));
+            document.getElementById('cartCount').textContent = cart.length;
+            alert(title + ' به سبد اضافه شد!');
+        }
+        if (document.getElementById('cartCount')) document.getElementById('cartCount').textContent = cart.length;
+
+        function scrollSlider(id, amount) {
+            const slider = document.getElementById(id);
+            if (slider) slider.scrollLeft -= amount;
+        }
+
+        document.addEventListener('mousedown', e => {
+            const slider = e.target.closest('.slider');
+            if (!slider) return;
+            let startX = e.pageX - slider.offsetLeft;
+            let scrollLeft = slider.scrollLeft;
+            let isDown = true;
+
+            const move = ev => {
+                if (!isDown) return;
+                ev.preventDefault();
+                const x = ev.pageX - slider.offsetLeft;
+                const walk = (x - startX) * 2;
+                slider.scrollLeft = scrollLeft - walk;
+            };
+            const up = () => { isDown = false; document.removeEventListener('mousemove', move); document.removeEventListener('mouseup', up); };
+
+            document.addEventListener('mousemove', move);
+            document.addEventListener('mouseup', up);
         });
 
-        html += '</div></div></section>';
-        container.innerHTML += html;
-    });
-}
-  </script>
+        initDefaultProducts();
+        loadSections();
+    </script>
+</body>
 </html>
